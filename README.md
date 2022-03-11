@@ -3,11 +3,17 @@ What is this project?
 This is sample app with base implementation of:
 
 Clean architecture 
+
 MVI
+
 Compose 
+
 Navigation Component 
+
 Hilt
-Retrofit 
+
+Retrofit
+ 
 Paging 3
 
 App functionality
