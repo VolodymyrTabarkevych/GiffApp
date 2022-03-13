@@ -19,8 +19,7 @@ sealed class AppTheme(val name: String, val colorPalette: Colors) {
 
     object Light : AppTheme(
         name = LIGHT_THEME_NAME, colorPalette = lightColors(
-            primary = Alabaster,
-            primaryVariant = Alabaster,
+            primary = Silk,
             onPrimary = Color.Black,
             background = AthensGray,
             surface = AthensGray
@@ -29,7 +28,7 @@ sealed class AppTheme(val name: String, val colorPalette: Colors) {
 
     object Dark : AppTheme(
         name = DARK_THEME_NAME, colorPalette = darkColors(
-            primary = OuterSpace,
+            primary = CodGray,
             onPrimary = Color.White,
             background = Color.Black,
             surface = Color.Black
@@ -40,7 +39,8 @@ sealed class AppTheme(val name: String, val colorPalette: Colors) {
         name = GREEN_THEME_NAME, colorPalette = lightColors(
             primary = Jade,
             onPrimary = Color.Black,
-            background = AthensGray
+            background = AthensGray,
+            surface = AthensGray
         )
     )
 

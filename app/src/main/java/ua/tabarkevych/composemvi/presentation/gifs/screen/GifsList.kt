@@ -9,8 +9,6 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.items
@@ -18,6 +16,7 @@ import coil.annotation.ExperimentalCoilApi
 import ua.tabarkevych.composemvi.domain.model.GifPost
 import ua.tabarkevych.composemvi.presentation.gifs.GifsContract
 import ua.tabarkevych.composemvi.ui.dimens.spacing
+import ua.tabarkevych.composemvi.ui.dimens.width
 
 @ExperimentalCoilApi
 @Composable
@@ -46,7 +45,7 @@ fun GifsList(
                             contentAlignment = Alignment.Center,
                             modifier = Modifier.fillParentMaxSize()
                         ) {
-                            CircularProgressIndicator(color = Color.Black, strokeWidth = 2.dp)
+                            CircularProgressIndicator(strokeWidth = MaterialTheme.width.medium)
                         }
                     }
                 }
@@ -58,7 +57,7 @@ fun GifsList(
                                 .fillMaxSize()
                                 .padding(MaterialTheme.spacing.medium)
                         ) {
-                            CircularProgressIndicator(color = Color.Black, strokeWidth = 2.dp)
+                            CircularProgressIndicator(strokeWidth = MaterialTheme.width.medium)
                         }
                     }
                 }

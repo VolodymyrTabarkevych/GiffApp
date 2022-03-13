@@ -8,7 +8,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import coil.ImageLoader
 import coil.annotation.ExperimentalCoilApi
 import coil.compose.rememberImagePainter
@@ -16,8 +18,23 @@ import coil.decode.GifDecoder
 import coil.decode.ImageDecoderDecoder
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.emptyFlow
 import ua.tabarkevych.composemvi.R
 import ua.tabarkevych.composemvi.presentation.gif.GifContract
+
+
+@ExperimentalCoilApi
+@Preview
+@Composable
+private fun GifScreenPreview() {
+    GifScreen(
+        navController = rememberNavController(),
+        state = GifContract.State,
+        effect = emptyFlow(),
+        setEvent = {},
+        gifUrl = ""
+    )
+}
 
 
 @ExperimentalCoilApi
@@ -35,7 +52,8 @@ fun GifScreen(
         topBar = { GifTopBar(setEvent = setEvent) },
         content = {
             Image(
-                modifier = Modifier.fillMaxSize(),
+                modifier = Modifier
+                    .fillMaxSize(),
                 painter = rememberImagePainter(
                     data = gifUrl,
                     imageLoader = ImageLoader.Builder(context)

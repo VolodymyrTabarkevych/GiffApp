@@ -23,7 +23,8 @@ class EntryPointActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         installSplashScreen()
         setContent {
-            ComposemviTheme(viewModel.viewState.collectAsState().value) {
+            val state = viewModel.viewState.collectAsState().value
+            ComposemviTheme(state) {
                 App()
             }
         }

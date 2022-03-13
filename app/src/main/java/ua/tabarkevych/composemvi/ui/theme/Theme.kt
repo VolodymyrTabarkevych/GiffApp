@@ -3,13 +3,9 @@ package ua.tabarkevych.composemvi.ui.theme
 import androidx.compose.material.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.ui.graphics.Color
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import ua.tabarkevych.composemvi.presentation.EntryPointContract
-import ua.tabarkevych.composemvi.ui.dimens.LocalSpacing
-import ua.tabarkevych.composemvi.ui.dimens.LocalTextSize
-import ua.tabarkevych.composemvi.ui.dimens.Spacing
-import ua.tabarkevych.composemvi.ui.dimens.TextSize
+import ua.tabarkevych.composemvi.ui.dimens.*
 
 
 @Composable
@@ -20,18 +16,28 @@ fun ComposemviTheme(
     val systemUiController = rememberSystemUiController()
     when (state.appTheme) {
         AppTheme.Dark -> {
-            systemUiController.setSystemBarsColor(color = Color.Black, darkIcons = false)
+            systemUiController.setSystemBarsColor(
+                color = AppTheme.Dark.colorPalette.primary,
+                darkIcons = false
+            )
         }
         AppTheme.Green -> {
-            systemUiController.setSystemBarsColor(color = Color.White, darkIcons = true)
+            systemUiController.setSystemBarsColor(
+                color = AppTheme.Green.colorPalette.primary,
+                darkIcons = true
+            )
         }
         AppTheme.Light -> {
-            systemUiController.setSystemBarsColor(color = Color.White, darkIcons = true)
+            systemUiController.setSystemBarsColor(
+                color = AppTheme.Light.colorPalette.primary,
+                darkIcons = true
+            )
         }
     }
     CompositionLocalProvider(
         LocalSpacing provides Spacing(),
-        LocalTextSize provides TextSize()
+        LocalTextSize provides TextSize(),
+        LocalWidth provides Width()
     ) {
         MaterialTheme(
             colors = ColorPalette,

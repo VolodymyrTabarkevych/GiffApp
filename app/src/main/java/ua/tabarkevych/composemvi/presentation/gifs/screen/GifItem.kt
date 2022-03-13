@@ -30,7 +30,6 @@ import ua.tabarkevych.composemvi.domain.model.GifPost
 import ua.tabarkevych.composemvi.presentation.gifs.GifsContract
 import ua.tabarkevych.composemvi.ui.dimens.spacing
 import ua.tabarkevych.composemvi.ui.dimens.textSize
-import ua.tabarkevych.composemvi.ui.theme.BlackSqueeze
 
 @ExperimentalCoilApi
 @Composable
@@ -99,7 +98,7 @@ fun GifItem(item: GifPost, setEvent: (event: GifsContract.Event) -> Unit) {
                 .height(gifHeight)
                 .fillMaxWidth()
                 .padding(bottom = MaterialTheme.spacing.small)
-                .background(BlackSqueeze)
+                .background(MaterialTheme.colors.primary)
                 .clickable(onClick = {
                     setEvent(GifsContract.Event.OnGifClicked(item.originalImageUrl))
                 }),

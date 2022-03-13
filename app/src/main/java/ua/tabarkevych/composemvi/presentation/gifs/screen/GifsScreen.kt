@@ -6,13 +6,28 @@ import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import androidx.paging.compose.collectAsLazyPagingItems
 import coil.annotation.ExperimentalCoilApi
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.flow.emptyFlow
 import ua.tabarkevych.composemvi.navigation.Screen
 import ua.tabarkevych.composemvi.presentation.gifs.GifsContract
+
+@ExperimentalCoilApi
+@Preview
+@Composable
+private fun GifsScreenPreview() {
+    GifsScreen(
+        navController = rememberNavController(),
+        state = GifsContract.State(emptyFlow()),
+        effect = emptyFlow(),
+        setEvent = {}
+    )
+}
 
 @ExperimentalCoilApi
 @Composable
