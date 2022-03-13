@@ -16,8 +16,7 @@ class GifsViewModel @Inject constructor(
     init {
         setState {
             copy(
-                gifsPagingDataFlow = gifsRepository.getTrendingGifs()
-                    .cachedIn(viewModelScope)
+                gifsPagingDataFlow = gifsRepository.getTrendingGifs().cachedIn(viewModelScope)
             )
         }
     }
