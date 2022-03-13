@@ -2,7 +2,19 @@ What is this project?
 
 This is sample app with base implementation of:
 
-Compose Navigation Component Hilt Retrofit Clean architecture and MVI pattern
+Clean architecture 
+
+MVI
+
+Compose 
+
+Navigation Component 
+
+Hilt
+
+Retrofit
+ 
+Paging 3
 
 App functionality
 
