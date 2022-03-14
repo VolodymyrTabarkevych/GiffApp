@@ -1,6 +1,5 @@
 package ua.tabarkevych.composemvi.presentation.theming.screen
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.width
@@ -16,6 +15,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.toSize
 import ua.tabarkevych.composemvi.R
+import ua.tabarkevych.composemvi.extensions.noRippleClickable
 import ua.tabarkevych.composemvi.presentation.theming.ThemingContract
 import ua.tabarkevych.composemvi.ui.theme.AppFont
 
@@ -38,7 +38,15 @@ fun ThemingDropdownFont(
         OutlinedTextField(
             modifier = Modifier
                 .fillMaxWidth()
-                .onGloballyPositioned { coordinates -> textFieldSize = coordinates.size.toSize() },
+                .onGloballyPositioned { coordinates -> textFieldSize = coordinates.size.toSize() }
+                .noRippleClickable {
+                    setEvent(
+                        ThemingContract.Event.OnFontsExpandedStateChanged(
+                            !state.isFontExpanded
+                        )
+                    )
+                },
+            enabled = false,
             value = state.selectedFont.name,
             onValueChange = {},
             label = {
@@ -50,17 +58,10 @@ fun ThemingDropdownFont(
             trailingIcon = {
                 Icon(
                     imageVector = Icons.Default.ArrowDropDown,
-                    contentDescription = null,
-                    modifier = Modifier.clickable {
-                        setEvent(
-                            ThemingContract.Event.OnFontsExpandedStateChanged(
-                                !state.isFontExpanded
-                            )
-                        )
-                    }
+                    contentDescription = null
                 )
             },
-            enabled = false
+            colors = TextFieldDefaults.outlinedTextFieldColors()
         )
 
         DropdownMenu(

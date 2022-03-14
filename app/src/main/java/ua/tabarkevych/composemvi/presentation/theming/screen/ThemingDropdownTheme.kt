@@ -1,6 +1,5 @@
 package ua.tabarkevych.composemvi.presentation.theming.screen
 
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -17,6 +16,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.toSize
 import ua.tabarkevych.composemvi.R
+import ua.tabarkevych.composemvi.extensions.noRippleClickable
 import ua.tabarkevych.composemvi.presentation.theming.ThemingContract
 import ua.tabarkevych.composemvi.ui.dimens.LocalSpacing
 import ua.tabarkevych.composemvi.ui.theme.AppTheme
@@ -36,28 +36,26 @@ fun ThemingDropdownTheme(
         var textFieldSize by remember { mutableStateOf(Size.Zero) }
 
         OutlinedTextField(
-            value = state.selectedTheme.name,
-            onValueChange = { },
             modifier = Modifier
                 .fillMaxWidth()
-                .onGloballyPositioned { coordinates ->
-                    textFieldSize = coordinates.size.toSize()
+                .onGloballyPositioned { coordinates -> textFieldSize = coordinates.size.toSize() }
+                .noRippleClickable {
+                    setEvent(
+                        ThemingContract.Event.OnThemesExpandedStateChanged(
+                            !state.isThemeExpanded
+                        )
+                    )
                 },
+            enabled = false,
+            value = state.selectedTheme.name,
+            onValueChange = { },
             label = { Text(stringResource(id = R.string.theming_theme_label)) },
             trailingIcon = {
                 Icon(
-                    modifier = Modifier.clickable {
-                        setEvent(
-                            ThemingContract.Event.OnThemesExpandedStateChanged(
-                                !state.isThemeExpanded
-                            )
-                        )
-                    },
                     imageVector = Icons.Default.ArrowDropDown,
                     contentDescription = null
                 )
-            },
-            enabled = false
+            }
         )
 
         DropdownMenu(
