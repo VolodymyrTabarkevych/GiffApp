@@ -6,18 +6,21 @@ import androidx.compose.material.Text
 import androidx.compose.material.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import ua.tabarkevych.composemvi.R
 import ua.tabarkevych.composemvi.presentation.gif.GifContract
 
 @Composable
+@Preview
+fun GifTopBarPreview() {
+    GifTopBar {}
+}
+
+@Composable
 fun GifTopBar(setEvent: (event: GifContract.Event) -> Unit) {
     TopAppBar(
-        title = {
-            Text(
-                text = "Gif"
-            )
-        },
+        title = { Text(text = stringResource(id = R.string.gif_title)) },
         navigationIcon = {
             IconButton(onClick = { setEvent(GifContract.Event.OnToolbarBackNavigationClicked) }) {
                 Icon(
@@ -27,10 +30,4 @@ fun GifTopBar(setEvent: (event: GifContract.Event) -> Unit) {
             }
         }
     )
-}
-
-@Composable
-@Preview
-fun GifTopBarPreview() {
-    GifTopBar {}
 }

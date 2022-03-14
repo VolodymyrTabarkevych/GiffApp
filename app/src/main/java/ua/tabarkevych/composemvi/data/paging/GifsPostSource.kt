@@ -1,4 +1,4 @@
-package ua.tabarkevych.composemvi.data.pagingsource
+package ua.tabarkevych.composemvi.data.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState

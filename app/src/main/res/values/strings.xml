@@ -1,3 +1,15 @@
 <resources>
     <string name="app_name">GifApp</string>
+
+    <!-- Theming -->
+    <string name="theming_title">Theming</string>
+    <string name="theming_font_label">Font family</string>
+    <string name="theming_theme_label">Theme</string>
+
+    <!-- Gifs -->
+    <string name="gifs_title">Gifs</string>
+    <string name="gifs_gif_title">gif by</string>
+
+    <!-- Gif -->
+    <string name="gif_title">Gif</string>
 </resources>

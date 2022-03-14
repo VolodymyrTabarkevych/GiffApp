@@ -12,10 +12,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.toSize
+import ua.tabarkevych.composemvi.R
 import ua.tabarkevych.composemvi.presentation.theming.ThemingContract
 import ua.tabarkevych.composemvi.ui.theme.AppFont
+
+@Preview
+@Composable
+fun ThemingDropdownFontPreview() {
+    ThemingDropdownFont(
+        state = ThemingContract.State(isFontExpanded = false, AppFont.Smooch)
+    ) {}
+}
 
 @Composable
 fun ThemingDropdownFont(
@@ -32,7 +42,10 @@ fun ThemingDropdownFont(
             value = state.selectedFont.name,
             onValueChange = {},
             label = {
-                Text(text = "Font family", fontFamily = state.selectedFont.family)
+                Text(
+                    text = stringResource(id = R.string.theming_font_label),
+                    fontFamily = state.selectedFont.family
+                )
             },
             trailingIcon = {
                 Icon(
@@ -69,12 +82,4 @@ fun ThemingDropdownFont(
             }
         }
     }
-}
-
-@Preview
-@Composable
-fun ThemingDropdownFontPreview() {
-    ThemingDropdownFont(
-        state = ThemingContract.State(isFontExpanded = false, AppFont.Smooch)
-    ) {}
 }

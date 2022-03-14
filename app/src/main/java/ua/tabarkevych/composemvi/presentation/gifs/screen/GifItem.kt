@@ -1,6 +1,7 @@
 package ua.tabarkevych.composemvi.presentation.gifs.screen
 
 import android.os.Build
+import android.os.Build.VERSION_CODES.P
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -13,6 +14,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
@@ -33,23 +35,26 @@ import ua.tabarkevych.composemvi.ui.dimens.textSize
 
 @ExperimentalCoilApi
 @Composable
+@Preview
+fun GifPreview() {
+    GifItem(
+        item = GifPost(
+            id = "1",
+            username = "",
+            title = "MEME",
+            importDatetime = "04.03.2022",
+            originalImageUrl = "",
+            fixedHeightImageUrl = "",
+            height = "",
+            avatarUrl = ""
+        )
+    ) {}
+}
+
+@ExperimentalCoilApi
+@Composable
 fun GifItem(item: GifPost, setEvent: (event: GifsContract.Event) -> Unit) {
-    val context = LocalContext.current
     val gifHeight = item.height.toInt().dp
-    val gif = rememberImagePainter(
-        data = item.avatarUrl,
-        imageLoader = ImageLoader.Builder(context)
-            .placeholder(R.drawable.ic_baseline_person_24)
-            .crossfade(true)
-            .componentRegistry {
-                if (Build.VERSION.SDK_INT >= 28) {
-                    add(ImageDecoderDecoder(context))
-                } else {
-                    add(GifDecoder())
-                }
-            }
-            .build()
-    )
 
     Column(
         Modifier
@@ -66,7 +71,20 @@ fun GifItem(item: GifPost, setEvent: (event: GifsContract.Event) -> Unit) {
                 )
         ) {
             Image(
-                painter = gif,
+                painter = rememberImagePainter(
+                    data = item.avatarUrl,
+                    imageLoader = ImageLoader.Builder(LocalContext.current)
+                        .placeholder(R.drawable.ic_baseline_person_24)
+                        .crossfade(true)
+                        .componentRegistry {
+                            if (Build.VERSION.SDK_INT >= P) {
+                                add(ImageDecoderDecoder(LocalContext.current))
+                            } else {
+                                add(GifDecoder())
+                            }
+                        }
+                        .build()
+                ),
                 modifier = Modifier
                     .size(36.dp)
                     .clip(CircleShape),
@@ -76,9 +94,9 @@ fun GifItem(item: GifPost, setEvent: (event: GifsContract.Event) -> Unit) {
             Column(modifier = Modifier.padding(start = MaterialTheme.spacing.small)) {
                 Text(
                     text = buildAnnotatedString {
-                        append("gif by ")
+                        append(stringResource(id = R.string.gifs_gif_title))
                         withStyle(style = SpanStyle(fontWeight = FontWeight.Black)) {
-                            append(item.username)
+                            append(" ${item.username}")
                         }
                     },
                     fontSize = MaterialTheme.textSize.normal,
@@ -104,12 +122,12 @@ fun GifItem(item: GifPost, setEvent: (event: GifsContract.Event) -> Unit) {
                 }),
             painter = rememberImagePainter(
                 data = item.fixedHeightImageUrl,
-                imageLoader = ImageLoader.Builder(context)
+                imageLoader = ImageLoader.Builder(LocalContext.current)
                     .placeholder(R.drawable.ic_baseline_gif_24)
                     .crossfade(true)
                     .componentRegistry {
-                        if (Build.VERSION.SDK_INT >= 28) {
-                            add(ImageDecoderDecoder(context))
+                        if (Build.VERSION.SDK_INT >= P) {
+                            add(ImageDecoderDecoder(LocalContext.current))
                         } else {
                             add(GifDecoder())
                         }
@@ -120,22 +138,4 @@ fun GifItem(item: GifPost, setEvent: (event: GifsContract.Event) -> Unit) {
             contentScale = ContentScale.Fit
         )
     }
-}
-
-@ExperimentalCoilApi
-@Composable
-@Preview
-fun GifPreview() {
-    GifItem(
-        item = GifPost(
-            id = "1",
-            username = "",
-            title = "MEME",
-            importDatetime = "04.03.2022",
-            originalImageUrl = "",
-            fixedHeightImageUrl = "",
-            height = "",
-            avatarUrl = ""
-        )
-    ) {}
 }

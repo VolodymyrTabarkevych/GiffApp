@@ -21,6 +21,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.emptyFlow
 import ua.tabarkevych.composemvi.R
 import ua.tabarkevych.composemvi.presentation.gif.GifContract
+import ua.tabarkevych.composemvi.util.EMPTY_STRING
 
 
 @ExperimentalCoilApi
@@ -32,7 +33,7 @@ private fun GifScreenPreview() {
         state = GifContract.State,
         effect = emptyFlow(),
         setEvent = {},
-        gifUrl = ""
+        gifUrl = EMPTY_STRING
     )
 }
 
@@ -46,7 +47,6 @@ fun GifScreen(
     setEvent: (event: GifContract.Event) -> Unit,
     gifUrl: String
 ) {
-    val context = LocalContext.current
     HandleEffect(navController = navController, effect = effect)
     Scaffold(
         topBar = { GifTopBar(setEvent = setEvent) },
@@ -56,12 +56,12 @@ fun GifScreen(
                     .fillMaxSize(),
                 painter = rememberImagePainter(
                     data = gifUrl,
-                    imageLoader = ImageLoader.Builder(context)
+                    imageLoader = ImageLoader.Builder(LocalContext.current)
                         .placeholder(R.drawable.ic_baseline_gif_24)
                         .crossfade(true)
                         .componentRegistry {
                             if (Build.VERSION.SDK_INT >= 28) {
-                                add(ImageDecoderDecoder(context))
+                                add(ImageDecoderDecoder(LocalContext.current))
                             } else {
                                 add(GifDecoder())
                             }

@@ -13,11 +13,19 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.toSize
+import ua.tabarkevych.composemvi.R
 import ua.tabarkevych.composemvi.presentation.theming.ThemingContract
 import ua.tabarkevych.composemvi.ui.dimens.LocalSpacing
 import ua.tabarkevych.composemvi.ui.theme.AppTheme
+
+@Preview
+@Composable
+fun ThemingDropdownThemePreview() {
+    ThemingDropdownTheme(state = ThemingContract.State()) { }
+}
 
 @Composable
 fun ThemingDropdownTheme(
@@ -35,7 +43,7 @@ fun ThemingDropdownTheme(
                 .onGloballyPositioned { coordinates ->
                     textFieldSize = coordinates.size.toSize()
                 },
-            label = { Text("Theme") },
+            label = { Text(stringResource(id = R.string.theming_theme_label)) },
             trailingIcon = {
                 Icon(
                     modifier = Modifier.clickable {
@@ -69,10 +77,4 @@ fun ThemingDropdownTheme(
             }
         }
     }
-}
-
-@Preview
-@Composable
-fun ThemingDropdownThemePreview() {
-    ThemingDropdownTheme(state = ThemingContract.State()) { }
 }

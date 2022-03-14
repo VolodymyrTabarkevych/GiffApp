@@ -2,7 +2,7 @@ package ua.tabarkevych.composemvi.data.repository
 
 import androidx.paging.Pager
 import androidx.paging.PagingConfig
-import ua.tabarkevych.composemvi.data.pagingsource.GifsPostSource
+import ua.tabarkevych.composemvi.data.paging.GifsPostSource
 import ua.tabarkevych.composemvi.domain.repository.IGifsRepository
 import ua.tabarkevych.composemvi.remote.datasource.gifs.IGifsRemoteDataSource
 import javax.inject.Inject
