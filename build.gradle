@@ -10,6 +10,7 @@ buildscript {
         paging_version = "3.1.1"
         datastore_version = "1.0.0"
         room_version = "2.5.0-alpha01"
+        accompanist_version = "0.23.1"
     }
     repositories {
         google()
