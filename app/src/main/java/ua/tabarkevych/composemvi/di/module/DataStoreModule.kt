@@ -22,7 +22,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-object PreferencesDataStoreModule {
+object DataStoreModule {
 
     private const val THEMING_PREFERENCES_NAME = "theming_preferences"
 
