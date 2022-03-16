@@ -37,7 +37,8 @@ fun ComposemviTheme(
     CompositionLocalProvider(
         LocalSpacing provides Spacing(),
         LocalTextSize provides TextSize(),
-        LocalWidth provides Width()
+        LocalWidth provides Width(),
+        LocalElevation provides Elevation()
     ) {
         MaterialTheme(
             colors = ColorPalette,
