@@ -2,6 +2,7 @@ package ua.tabarkevych.composemvi.presentation.gifs.screen
 
 import android.os.Build
 import android.os.Build.VERSION_CODES.P
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -12,6 +13,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -74,7 +76,12 @@ fun GifItem(item: GifPost, setEvent: (event: GifsContract.Event) -> Unit) {
                 painter = rememberImagePainter(
                     data = item.avatarUrl,
                     imageLoader = ImageLoader.Builder(LocalContext.current)
-                        .placeholder(R.drawable.ic_baseline_person_24)
+                        .placeholder(
+                            AppCompatResources.getDrawable(
+                                LocalContext.current,
+                                R.drawable.ic_baseline_person_24
+                            )?.apply { setTint(MaterialTheme.colors.onPrimary.toArgb()) }
+                        )
                         .crossfade(true)
                         .componentRegistry {
                             if (Build.VERSION.SDK_INT >= P) {
@@ -116,14 +123,19 @@ fun GifItem(item: GifPost, setEvent: (event: GifsContract.Event) -> Unit) {
                 .height(gifHeight)
                 .fillMaxWidth()
                 .padding(bottom = MaterialTheme.spacing.small)
-                .background(MaterialTheme.colors.primary)
+                .background(MaterialTheme.colors.surface)
                 .clickable(onClick = {
                     setEvent(GifsContract.Event.OnGifClicked(item.originalImageUrl))
                 }),
             painter = rememberImagePainter(
                 data = item.fixedHeightImageUrl,
                 imageLoader = ImageLoader.Builder(LocalContext.current)
-                    .placeholder(R.drawable.ic_baseline_gif_24)
+                    .placeholder(
+                        AppCompatResources.getDrawable(
+                            LocalContext.current,
+                            R.drawable.ic_baseline_gif_24
+                        )?.apply { setTint(MaterialTheme.colors.onPrimary.toArgb()) }
+                    )
                     .crossfade(true)
                     .componentRegistry {
                         if (Build.VERSION.SDK_INT >= P) {
