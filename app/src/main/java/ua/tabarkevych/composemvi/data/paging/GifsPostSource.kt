@@ -11,7 +11,10 @@ class GifsPostSource(
 ) : PagingSource<Int, GifPost>() {
 
     override fun getRefreshKey(state: PagingState<Int, GifPost>): Int? {
-        return state.anchorPosition
+        return state.anchorPosition?.let { anchorPosition ->
+            val anchorPage = state.closestPageToPosition(anchorPosition)
+            anchorPage?.prevKey
+        }
     }
 
     override suspend fun load(params: LoadParams<Int>): LoadResult<Int, GifPost> {

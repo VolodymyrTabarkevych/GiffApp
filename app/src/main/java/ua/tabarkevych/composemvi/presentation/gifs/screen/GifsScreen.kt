@@ -11,6 +11,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import androidx.paging.compose.collectAsLazyPagingItems
 import coil.annotation.ExperimentalCoilApi
+import com.google.accompanist.swiperefresh.SwipeRefresh
+import com.google.accompanist.swiperefresh.rememberSwipeRefreshState
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.flow.emptyFlow
@@ -23,7 +25,7 @@ import ua.tabarkevych.composemvi.presentation.gifs.GifsContract
 private fun GifsScreenPreview() {
     GifsScreen(
         navController = rememberNavController(),
-        state = GifsContract.State(emptyFlow()),
+        state = GifsContract.State(isRefreshing = false, gifsPagingDataFlow = emptyFlow()),
         effect = emptyFlow(),
         setEvent = {}
     )
@@ -37,16 +39,22 @@ fun GifsScreen(
     effect: Flow<GifsContract.Effect>,
     setEvent: (event: GifsContract.Event) -> Unit
 ) {
+    val gifsPagingItems = state.gifsPagingDataFlow.collectAsLazyPagingItems()
     HandleEffect(context = LocalContext.current, navController = navController, effect = effect)
     Scaffold(
         topBar = {
             GifsTopBar(setEvent = setEvent)
         },
         content = {
-            GifsList(
-                items = state.gifsPagingDataFlow.collectAsLazyPagingItems(),
-                setEvent = setEvent
-            )
+            SwipeRefresh(
+                state = rememberSwipeRefreshState(isRefreshing = state.isRefreshing),
+                onRefresh = { gifsPagingItems.refresh() }
+            ) {
+                GifsList(
+                    items = gifsPagingItems,
+                    setEvent = setEvent
+                )
+            }
         }
     )
 }

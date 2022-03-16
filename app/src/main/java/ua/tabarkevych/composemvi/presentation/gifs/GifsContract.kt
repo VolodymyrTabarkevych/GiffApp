@@ -18,7 +18,10 @@ class GifsContract {
         data class OnGifsError(val message: String) : Event()
     }
 
-    data class State(val gifsPagingDataFlow: Flow<PagingData<GifPost>>) : ViewState
+    data class State(
+        val isRefreshing: Boolean,
+        val gifsPagingDataFlow: Flow<PagingData<GifPost>>
+    ) : ViewState
 
     sealed class Effect : ViewEffect {
 

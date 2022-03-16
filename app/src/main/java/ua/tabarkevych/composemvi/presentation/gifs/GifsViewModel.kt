@@ -22,7 +22,7 @@ class GifsViewModel @Inject constructor(
     }
 
     override fun setInitialState(): GifsContract.State {
-        return GifsContract.State(emptyFlow())
+        return GifsContract.State(isRefreshing = false, gifsPagingDataFlow = emptyFlow())
     }
 
     override fun handleEvent(event: GifsContract.Event) {
