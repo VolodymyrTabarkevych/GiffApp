@@ -1,6 +1,21 @@
 <resources>
     <string name="app_name">GifApp</string>
 
+    <!-- Font -->
+    <string name="font_body_1">body 1</string>
+    <string name="font_body_2">body 2</string>
+    <string name="font_button">button</string>
+    <string name="font_caption">caption</string>
+    <string name="font_h_1">h1</string>
+    <string name="font_h_2">h2</string>
+    <string name="font_h_3">h3</string>
+    <string name="font_h_4">h4</string>
+    <string name="font_h_5">h5</string>
+    <string name="font_h_6">h6</string>
+    <string name="font_overline">overline</string>
+    <string name="font_subtitle_1">subtitle1</string>
+    <string name="font_subtitle_2">subtitle2</string>
+
     <!-- Theming -->
     <string name="theming_title">Theming</string>
     <string name="theming_font_label">Font family</string>
