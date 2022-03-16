@@ -57,7 +57,7 @@ fun SetupNavGraph(navController: NavHostController, width: Int) {
                 navController = navController,
                 state = viewModel.viewState.collectAsState().value,
                 effect = viewModel.effect,
-                setEvent = { viewModel.setEvent(it) }
+                setEvent = viewModel::setEvent
             )
         }
         composable(
@@ -86,7 +86,7 @@ fun SetupNavGraph(navController: NavHostController, width: Int) {
                 navController = navController,
                 state = viewModel.viewState.collectAsState().value,
                 effect = viewModel.effect,
-                setEvent = { viewModel.setEvent(it) }
+                setEvent = viewModel::setEvent
             )
         }
         composable(
@@ -119,7 +119,7 @@ fun SetupNavGraph(navController: NavHostController, width: Int) {
                     navController = navController,
                     state = viewModel.viewState.collectAsState().value,
                     effect = viewModel.effect,
-                    setEvent = { viewModel.setEvent(it) },
+                    setEvent = viewModel::setEvent,
                     gifUrl = gifUrl
                 )
             } ?: throw IllegalArgumentException()
