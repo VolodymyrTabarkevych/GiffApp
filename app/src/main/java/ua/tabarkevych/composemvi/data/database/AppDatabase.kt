@@ -12,7 +12,8 @@ import ua.tabarkevych.composemvi.data.entity.GifEntity
     entities = [
         GifEntity::class
     ],
-    version = 1
+    version = 1,
+    exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
 
