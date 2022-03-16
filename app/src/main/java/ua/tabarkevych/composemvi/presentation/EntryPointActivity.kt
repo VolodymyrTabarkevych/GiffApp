@@ -7,6 +7,7 @@ import androidx.activity.viewModels
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import coil.annotation.ExperimentalCoilApi
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
@@ -28,7 +29,7 @@ class EntryPointActivity : ComponentActivity() {
             val state = viewModel.viewState.collectAsState().value
             BoxWithConstraints() {
                 ComposemviTheme(state) {
-                    App(constraints.maxWidth / 2)
+                    App(constraints.maxWidth)
                 }
             }
         }
