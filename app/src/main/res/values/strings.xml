@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">GifApp</string>
 
+    <!-- Common -->
+    <string name="common_refresh">Refresh</string>
+    <string name="common_retry">Retry</string>
+
     <!-- Font -->
     <string name="font_body_1">body 1</string>
     <string name="font_body_2">body 2</string>

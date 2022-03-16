@@ -31,6 +31,7 @@ class GifsViewModel @Inject constructor(
             is GifsContract.Event.OnGifClicked -> setEffect {
                 GifsContract.Effect.Navigation.ToGif(event.gifUrl)
             }
+            is GifsContract.Event.OnGifsError -> setEffect { GifsContract.Effect.ShowError(event.message) }
         }
     }
 }

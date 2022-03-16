@@ -14,6 +14,8 @@ class GifsContract {
         object OnToolbarThemingClicked : Event()
 
         data class OnGifClicked(val gifUrl: String) : Event()
+
+        data class OnGifsError(val message: String) : Event()
     }
 
     data class State(val gifsPagingDataFlow: Flow<PagingData<GifPost>>) : ViewState
