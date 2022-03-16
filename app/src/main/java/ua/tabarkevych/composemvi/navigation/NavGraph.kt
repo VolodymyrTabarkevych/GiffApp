@@ -1,9 +1,12 @@
 package ua.tabarkevych.composemvi.navigation
 
-import androidx.compose.animation.*
+import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.tween
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
@@ -17,6 +20,8 @@ import ua.tabarkevych.composemvi.presentation.gifs.GifsViewModel
 import ua.tabarkevych.composemvi.presentation.gifs.screen.GifsScreen
 import ua.tabarkevych.composemvi.presentation.theming.ThemingViewModel
 import ua.tabarkevych.composemvi.presentation.theming.screen.ThemingScreen
+
+private const val TRANSITION_DURATION = 300
 
 @ExperimentalAnimationApi
 @ExperimentalCoilApi
@@ -32,19 +37,19 @@ fun SetupNavGraph(navController: NavHostController, width: Int) {
                 slideOutHorizontally(
                     targetOffsetX = { -width },
                     animationSpec = tween(
-                        durationMillis = 300,
+                        durationMillis = TRANSITION_DURATION,
                         easing = FastOutSlowInEasing
                     )
-                ) + fadeOut(animationSpec = tween(300))
+                )
             },
             popEnterTransition = {
                 slideInHorizontally(
                     initialOffsetX = { -width },
                     animationSpec = tween(
-                        durationMillis = 300,
+                        durationMillis = TRANSITION_DURATION,
                         easing = FastOutSlowInEasing
                     )
-                ) + fadeIn(animationSpec = tween(300))
+                )
             }
         ) {
             val viewModel: GifsViewModel = hiltViewModel()
@@ -61,19 +66,19 @@ fun SetupNavGraph(navController: NavHostController, width: Int) {
                 slideInHorizontally(
                     initialOffsetX = { width },
                     animationSpec = tween(
-                        durationMillis = 300,
+                        durationMillis = TRANSITION_DURATION,
                         easing = FastOutSlowInEasing
                     )
-                ) + fadeIn(animationSpec = tween(300))
+                )
             },
             popExitTransition = {
                 slideOutHorizontally(
                     targetOffsetX = { width },
                     animationSpec = tween(
-                        durationMillis = 300,
+                        durationMillis = TRANSITION_DURATION,
                         easing = FastOutSlowInEasing
                     )
-                ) + fadeOut(animationSpec = tween(300))
+                )
             }
         ) {
             val viewModel: ThemingViewModel = hiltViewModel()
@@ -90,19 +95,19 @@ fun SetupNavGraph(navController: NavHostController, width: Int) {
                 slideInHorizontally(
                     initialOffsetX = { width },
                     animationSpec = tween(
-                        durationMillis = 300,
+                        durationMillis = TRANSITION_DURATION,
                         easing = FastOutSlowInEasing
                     )
-                ) + fadeIn(animationSpec = tween(300))
+                )
             },
             popExitTransition = {
                 slideOutHorizontally(
                     targetOffsetX = { width },
                     animationSpec = tween(
-                        durationMillis = 300,
+                        durationMillis = TRANSITION_DURATION,
                         easing = FastOutSlowInEasing
                     )
-                ) + fadeOut(animationSpec = tween(300))
+                )
             },
             arguments = listOf(navArgument(Screen.Gif.Args.GIF_URL) {
                 type = NavType.StringType

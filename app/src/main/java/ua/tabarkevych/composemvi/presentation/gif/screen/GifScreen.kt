@@ -1,12 +1,16 @@
 package ua.tabarkevych.composemvi.presentation.gif.screen
 
 import android.os.Build
+import android.os.Build.VERSION_CODES.P
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavHostController
@@ -22,7 +26,6 @@ import kotlinx.coroutines.flow.emptyFlow
 import ua.tabarkevych.composemvi.R
 import ua.tabarkevych.composemvi.presentation.gif.GifContract
 import ua.tabarkevych.composemvi.util.EMPTY_STRING
-
 
 @ExperimentalCoilApi
 @Preview
@@ -57,10 +60,15 @@ fun GifScreen(
                 painter = rememberImagePainter(
                     data = gifUrl,
                     imageLoader = ImageLoader.Builder(LocalContext.current)
-                        .placeholder(R.drawable.ic_baseline_gif_24)
+                        .placeholder(
+                            AppCompatResources.getDrawable(
+                                LocalContext.current,
+                                R.drawable.ic_baseline_gif_24
+                            )?.apply { setTint(MaterialTheme.colors.onPrimary.toArgb()) }
+                        )
                         .crossfade(true)
                         .componentRegistry {
-                            if (Build.VERSION.SDK_INT >= 28) {
+                            if (Build.VERSION.SDK_INT >= P) {
                                 add(ImageDecoderDecoder(LocalContext.current))
                             } else {
                                 add(GifDecoder())
