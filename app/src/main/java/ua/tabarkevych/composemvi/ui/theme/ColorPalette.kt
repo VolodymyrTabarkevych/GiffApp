@@ -19,7 +19,7 @@ sealed class AppTheme(val name: String, val colorPalette: Colors) {
 
     object Light : AppTheme(
         name = LIGHT_THEME_NAME, colorPalette = lightColors(
-            primary = Linen,
+            primary = MandysPink,
             onPrimary = Color.Black,
             background = AthensGray,
             surface = BlackSqueeze
