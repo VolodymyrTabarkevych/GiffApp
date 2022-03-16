@@ -55,7 +55,14 @@ fun ThemingDropdownTheme(
                     imageVector = Icons.Default.ArrowDropDown,
                     contentDescription = null
                 )
-            }
+            },
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                disabledTextColor = MaterialTheme.colors.onBackground,
+                disabledBorderColor = MaterialTheme.colors.onBackground,
+                disabledLabelColor = MaterialTheme.colors.onBackground,
+                disabledPlaceholderColor = MaterialTheme.colors.onBackground,
+                disabledTrailingIconColor = MaterialTheme.colors.onBackground
+            )
         )
 
         DropdownMenu(

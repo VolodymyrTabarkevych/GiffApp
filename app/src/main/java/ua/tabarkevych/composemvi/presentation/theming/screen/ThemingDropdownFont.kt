@@ -61,7 +61,13 @@ fun ThemingDropdownFont(
                     contentDescription = null
                 )
             },
-            colors = TextFieldDefaults.outlinedTextFieldColors()
+            colors = TextFieldDefaults.outlinedTextFieldColors(
+                disabledTextColor = MaterialTheme.colors.onBackground,
+                disabledBorderColor = MaterialTheme.colors.onBackground,
+                disabledLabelColor = MaterialTheme.colors.onBackground,
+                disabledPlaceholderColor = MaterialTheme.colors.onBackground,
+                disabledTrailingIconColor = MaterialTheme.colors.onBackground
+            )
         )
 
         DropdownMenu(
